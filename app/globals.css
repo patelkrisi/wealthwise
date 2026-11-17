@@ -1,0 +1,77 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #f6f7f4;
+  --card: #ffffff;
+  --fg: #0f1a17;
+  --muted: #5f6f6a;
+  --border: #e3e8e4;
+  --soft: #eef4f1;
+  --primary: #0f766e;
+  --primary-2: #14b8a6;
+  --primary-fg: #ffffff;
+  --primary-soft: #ccfbf1;
+  --good: #0d9488;
+  --warn: #d97706;
+  --bad: #e11d48;
+  --coin: #f59e0b;
+  color-scheme: light;
+}
+.dark {
+  --bg: #0b1110;
+  --card: #121a18;
+  --fg: #e8efec;
+  --muted: #93a39e;
+  --border: #22302c;
+  --soft: #172320;
+  --primary: #2dd4bf;
+  --primary-2: #5eead4;
+  --primary-fg: #04201c;
+  --primary-soft: #0f2f2b;
+  color-scheme: dark;
+}
+/* Colour themes (Settings → Appearance). Teal is the default in :root / .dark above. */
+:root[data-accent='ocean'] { --primary: #1d4ed8; --primary-2: #3b82f6; --primary-fg: #ffffff; --primary-soft: #dbeafe; }
+:root.dark[data-accent='ocean'] { --primary: #60a5fa; --primary-2: #93c5fd; --primary-fg: #0b1730; --primary-soft: #13233f; }
+:root[data-accent='royal'] { --primary: #6d28d9; --primary-2: #8b5cf6; --primary-fg: #ffffff; --primary-soft: #ede9fe; }
+:root.dark[data-accent='royal'] { --primary: #a78bfa; --primary-2: #c4b5fd; --primary-fg: #1b0f33; --primary-soft: #241a3d; }
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-soft: var(--soft);
+  --color-primary: var(--primary);
+  --color-primary-2: var(--primary-2);
+  --color-primary-fg: var(--primary-fg);
+  --color-primary-soft: var(--primary-soft);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --color-coin: var(--coin);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+html, body { background: var(--bg); color: var(--fg); }
+body { font-feature-settings: 'cv11', 'ss01'; -webkit-font-smoothing: antialiased; }
+.num { font-variant-numeric: tabular-nums; }
+* { -webkit-tap-highlight-color: transparent; }
+::selection { background: var(--primary-soft); }
+input[type='number']::-webkit-inner-spin-button { -webkit-appearance: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { scrollbar-width: none; }
+
+@keyframes coin-pop { 0% { transform: translateY(8px) scale(.8); opacity: 0 } 30% { transform: translateY(-6px) scale(1.1); opacity: 1 } 100% { transform: translateY(-40px) scale(1); opacity: 0 } }
+.coin-pop { animation: coin-pop 1.6s ease-out forwards; }
+@keyframes flame { 0%, 100% { transform: scale(1) rotate(-2deg) } 50% { transform: scale(1.08) rotate(2deg) } }
+.flame { display: inline-block; animation: flame 1.8s ease-in-out infinite; transform-origin: 50% 90%; }
+@keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--bad) 45%, transparent) } 100% { box-shadow: 0 0 0 12px transparent } }
+.mic-live { animation: pulse-ring 1.2s infinite; }
+@media (prefers-reduced-motion: reduce) { .coin-pop, .flame, .mic-live { animation: none } }
+.frame-silver { box-shadow: 0 0 0 2px var(--card), 0 0 0 4px #94a3b8; }
+.frame-gold { box-shadow: 0 0 0 2px var(--card), 0 0 0 4px #eab308; }
+.frame-rangoli { box-shadow: 0 0 0 2px var(--card), 0 0 0 4px #ec4899, 0 0 0 6px #f59e0b; }
